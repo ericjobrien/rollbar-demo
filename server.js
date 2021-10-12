@@ -9,6 +9,8 @@ const rollbar = new Rollbar( {
 });
 const app = express();
 
+
+//set middleware to parse express calls into json
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -28,7 +30,10 @@ app.post('/api/student', (req, res) => {
     res.status(200).send(students);
 })
 
+
+//middleware to throw an error message to rollbar
 app.use(rollbar.errorHandler());
+
 const port = process.env.PORT || 4400;
 
 app.listen(port, () => { console.log(`Server is up on ${port}.`)})
