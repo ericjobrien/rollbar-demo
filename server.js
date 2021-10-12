@@ -12,6 +12,7 @@ const app = express();
 
 //set middleware to parse express calls into json
 app.use(express.json());
+app.use('/style', express.static('./public/styles.css'));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
