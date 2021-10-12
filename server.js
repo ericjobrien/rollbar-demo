@@ -14,6 +14,17 @@ app.get('/', (req, res) => {
     rollbar.info('html file server successfully');
 });
 
+let students = [];
+
+app.post('api/student', (req, res) => {
+    let { name } = req.body;
+    name = name.trim();
+
+    students.push(name);
+
+    rollbar.log('student added sucessfully', {author: 'Dj', type: 'manual entry'});
+    res.status(200).send(students);
+})
 const port = process.env.PORT || 4400;
 
 app.listen(port, () => { console.log(`Server is up on ${port}.`)})
